@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Put in the base store this product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet"
+          href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5 mb-5">
+<form th:object="${owerwriteProduct}" action="/putProduct" method="post">
+    <input type="number" th:field="*{storeId}" placeholder="Input ID" class="form-control"><br>
+    <input type="text" th:field="*{productName}"  placeholder="Input name" class="form-control"><br>
+    <input type="text" th:field="*{cost}"  placeholder="Input cost" class="form-control"><br>
+    <input type="datetime-local" th:field="*{productDate}" placeholder="Input date" class="form-control"><br>
+    <button type="submit" class="btn btn-success">Overwrite </button>
+</form>
+</div>
+</body>
+</html>
