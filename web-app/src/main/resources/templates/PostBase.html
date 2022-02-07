@@ -12,12 +12,12 @@
 <body>
 <div class="container mt-5 mb-5">
 
-    <form id = "postForm" th:object="${newProduct}" action="/postProduct" method="post">
-<!--    <input type="number" th:filed="*{storeId}" value="" class="from-control"><br>-->
-    <input type="text" th:filed="*{productName}" placeholder="Input product name" class="from-control"><br>
-    <input type="number" th:filed="*{cost}" placeholder="Input cost produkt" class="from-control"><br>
-    <input type="datetime-local" th:filed="*{productDate}" placeholder="Input date create" class="from-control"><br>
-    <button type="submit"  class="btn btn-success">Add </button>
+    <form th:object="${newProduct}" action="/postProduct" method="post">
+<!--    <input type="number" th:field="*{storeId}" value="" class="from-control"><br>-->
+    <input type="text" th:field="*{productName}" placeholder="Input product name" class="from-control"><br>
+    <input type="number" th:field="*{cost}" placeholder="Input cost produkt" class="from-control"><br>
+    <input type="datetime-local" th:field="*{productDate}" placeholder="Input date create" class="from-control"><br>
+    <button type="submit" class="btn btn-success">Add </button>
 </form>
 </div>
 </body>

@@ -10,11 +10,22 @@
           th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
+
+    <div th:each="el : ${getProduct}">
+
+        <td style="width: 40%; height: 15px;"; th:text="${el.storeId}">storerId</td>
+        <td style="width: 40%; height: 15px;"; th:text="${el.productName}">productName</td>
+        <td style="width: 40%; height: 15px;"; th:text="${el.cost}">cost</td>
+        <td style="width: 40%; height: 15px;"; th:text="${el.productDate}">productDate</td>
+
+    </div>
+
+
 <div class="container mt-5 mb-5">
 <form th:object="${owerwriteProduct}" action="/putProduct" method="post">
     <input type="number" th:field="*{storeId}" placeholder="Input ID" class="form-control"><br>
     <input type="text" th:field="*{productName}"  placeholder="Input name" class="form-control"><br>
-    <input type="text" th:field="*{cost}"  placeholder="Input cost" class="form-control"><br>
+    <input type="number" th:field="*{cost}"  placeholder="Input cost" class="form-control"><br>
     <input type="datetime-local" th:field="*{productDate}" placeholder="Input date" class="form-control"><br>
     <button type="submit" class="btn btn-success">Overwrite </button>
 </form>
