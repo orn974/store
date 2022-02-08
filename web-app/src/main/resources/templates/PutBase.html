@@ -10,23 +10,23 @@
           th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
+<div class="container mt-5 mb-5">
+    <div>
 
-    <div th:each="el : ${getProduct}">
-
-        <td style="width: 40%; height: 15px;"; th:text="${el.storeId}">storerId</td>
-        <td style="width: 40%; height: 15px;"; th:text="${el.productName}">productName</td>
-        <td style="width: 40%; height: 15px;"; th:text="${el.cost}">cost</td>
-        <td style="width: 40%; height: 15px;"; th:text="${el.productDate}">productDate</td>
+        <td style="width: 40%; height: 15px;"; th:text="${productPut.storeId}">storerId</td>
+        <td style="width: 40%; height: 15px;"; th:text="${productPut.productName}">productName</td>
+        <td style="width: 40%; height: 15px;"; th:text="${productPut.cost}">cost</td>
+        <td style="width: 40%; height: 15px;"; th:text="${productPut.productDate}">productDate</td>
 
     </div>
 
 
 <div class="container mt-5 mb-5">
-<form th:object="${owerwriteProduct}" action="/putProduct" method="post">
+<form th:object="${productPut}" action="/putProductWeb" method="post">
     <input type="number" th:field="*{storeId}" placeholder="Input ID" class="form-control"><br>
     <input type="text" th:field="*{productName}"  placeholder="Input name" class="form-control"><br>
-    <input type="number" th:field="*{cost}"  placeholder="Input cost" class="form-control"><br>
-    <input type="datetime-local" th:field="*{productDate}" placeholder="Input date" class="form-control"><br>
+    <input type="number" step="0.01" th:field="*{cost}"  placeholder="Input cost" class="form-control"><br>
+    <input type="date" th:field="*{productDate}" placeholder="Input date create" class="from-control"><br>
     <button type="submit" class="btn btn-success">Overwrite </button>
 </form>
 </div>

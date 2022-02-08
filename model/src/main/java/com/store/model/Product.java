@@ -17,11 +17,15 @@ public class Product {
     Long storeId;
     private String productName;
     private BigDecimal cost;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate productDate;
 
     public Long getStoreId() {
         return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
     }
 
     public String getProductName() {

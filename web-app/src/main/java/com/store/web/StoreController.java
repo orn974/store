@@ -9,22 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
 public class StoreController {
+    public Long tempId;
     RestTemplate restTemplate;
     {restTemplate = new RestTemplate();}
     final String ROOT_URL = "http://localhost:8081/";
 
     @GetMapping ("/getController")
     public String getContollerMethod (Model model){
-    restTemplate = new RestTemplate();
     ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
         List storeList = stores.getBody();
-
         model.addAttribute("storesListWeb", storeList);
-
         return "GetBase";
     }
 
@@ -35,7 +34,6 @@ public class StoreController {
     @PostMapping("/postProduct")
     public String postProductWeb (Product newProduct) throws Exception{
         System.out.println("Product 1 " + newProduct);
-        //restTemplate = new RestTemplate();
         restTemplate.postForEntity(ROOT_URL+"post", newProduct, Product.class);
         System.out.println("Product 2 " + newProduct);
         return "redirect:/getController";
@@ -43,33 +41,31 @@ public class StoreController {
 
     @GetMapping("/putProduct")
     public String putProductWeb (Model model){
-
-//        ResponseEntity<Optional> prodactOptional = restTemplate.getForEntity(ROOT_URL + "/getOne/2", Optional.class);
-//        Optional<Product> productProduct= (Optional<Product>) prodactOptional.getBody().get();
-        ResponseEntity<Product> product = restTemplate.getForEntity(ROOT_URL + "/getOne/2", Product.class);
-       // Optional<Product> productProduct= (Optional<Product>) prodactOptional.getBody().get();
-        System.out.println("getproduct" + product);
-        model.addAttribute("getProduct", product);
+        ResponseEntity<Product> product = restTemplate.getForEntity(ROOT_URL + "getOne/2", Product.class);
+        System.out.println("productPut" + product.getBody());
+        tempId = Objects.requireNonNull(product.getBody()).getStoreId();
+        System.out.println("TempID "+ tempId);
+        model.addAttribute("productPut", product.getBody());
         return "PutBase";
     }
-    @PostMapping("/putProduct")
-    public String putProductWeb (Product owerwriteProduct) throws Exception{
-        System.out.println("owerwriteProduct 1 " + owerwriteProduct);
-        restTemplate = new RestTemplate();
-        restTemplate.put(ROOT_URL + "put", owerwriteProduct, Product.class);
-        System.out.println("owerwriteProduct 2 " + owerwriteProduct);
+    @PostMapping("/putProductWeb")
+    public String putProductWeb (Product productPut) throws Exception{
+        System.out.println("owerwriteProduct 1 " + productPut);
+        //productPut.setStoreId(tempId);
+        System.out.println("IDNEW"+productPut.getStoreId());
+        restTemplate.put(ROOT_URL + "put", productPut, Product.class);
+        System.out.println("owerwriteProduct 2 " + productPut);
         return "redirect:/getController";
     }
 
     @GetMapping("/delProduct")
-    public String delProductWeb (Model model){
+    public String delProduct (Model model){
         return "DelBase";
     }
     @DeleteMapping("/delProduct")
-    public String delProductWeb (@PathVariable (value = "id") Long id){
+    public String delProduct (@PathVariable (value = "id") Long id){
         restTemplate = new RestTemplate();
         restTemplate.delete(ROOT_URL+"delete", id);
         return "redirect:/getController";
     }
-
 }
