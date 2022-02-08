@@ -70,8 +70,8 @@ public class StoreRestController {
 
 
 }
-@DeleteMapping("/delete")
-    public void deleteProduct (@PathVariable Long id){
-    storeRepository.deleteById(id);
+@DeleteMapping("/delete/{storeId}")
+    public void deleteProduct (@PathVariable Long storeId){
+    storeRepository.deleteById(storeId);
 }
 }

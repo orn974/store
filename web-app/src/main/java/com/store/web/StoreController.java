@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 public class StoreController {
-    public Long tempId;
+
     RestTemplate restTemplate;
     {restTemplate = new RestTemplate();}
     final String ROOT_URL = "http://localhost:8081/";
@@ -31,41 +31,31 @@ public class StoreController {
     public String postProductWeb(Model model){
         model.addAttribute("newProduct", new Product());
         return "PostBase";}
+
     @PostMapping("/postProduct")
-    public String postProductWeb (Product newProduct) throws Exception{
+    public String postProductWeb (Product newProduct, Model model) throws Exception{
         System.out.println("Product 1 " + newProduct);
         restTemplate.postForEntity(ROOT_URL+"post", newProduct, Product.class);
         System.out.println("Product 2 " + newProduct);
         return "redirect:/getController";
     }
 
-    @GetMapping("/putProduct")
-    public String putProductWeb (Model model){
-        ResponseEntity<Product> product = restTemplate.getForEntity(ROOT_URL + "getOne/2", Product.class);
+    @GetMapping("/putProduct/{storeId}")
+    public String putProductWeb (@PathVariable Long storeId, Model model){
+        ResponseEntity<Product> product = restTemplate.getForEntity(ROOT_URL + "getOne/" + storeId, Product.class);
         System.out.println("productPut" + product.getBody());
-        tempId = Objects.requireNonNull(product.getBody()).getStoreId();
-        System.out.println("TempID "+ tempId);
         model.addAttribute("productPut", product.getBody());
         return "PutBase";
     }
     @PostMapping("/putProductWeb")
-    public String putProductWeb (Product productPut) throws Exception{
-        System.out.println("owerwriteProduct 1 " + productPut);
-        //productPut.setStoreId(tempId);
-        System.out.println("IDNEW"+productPut.getStoreId());
+    public String putProductWeb (Product productPut,Model model) throws Exception{
         restTemplate.put(ROOT_URL + "put", productPut, Product.class);
-        System.out.println("owerwriteProduct 2 " + productPut);
         return "redirect:/getController";
     }
 
-    @GetMapping("/delProduct")
-    public String delProduct (Model model){
-        return "DelBase";
-    }
-    @DeleteMapping("/delProduct")
-    public String delProduct (@PathVariable (value = "id") Long id){
-        restTemplate = new RestTemplate();
-        restTemplate.delete(ROOT_URL+"delete", id);
+    @GetMapping("/delProduct/{storeId}")
+    public String delProduct (@PathVariable Long storeId){
+        restTemplate.delete(ROOT_URL+"delete/" + storeId);
         return "redirect:/getController";
     }
 }
