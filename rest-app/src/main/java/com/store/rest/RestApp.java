@@ -28,6 +28,15 @@ public class RestApp {
                 storeRepository.save(new Product("Phones", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
                 storeRepository.save(new Product("Phones2", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
                 storeRepository.save(new Product("Phones3", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones4", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));storeRepository.save(new Product("Phones", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones2", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones3", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones4", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));storeRepository.save(new Product("Phones", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones2", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones3", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones4", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));storeRepository.save(new Product("Phones", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones2", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
+                storeRepository.save(new Product("Phones3", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
                 storeRepository.save(new Product("Phones4", BigDecimal.valueOf(12.25), LocalDate.of(1987,6,22)));
             };
         }

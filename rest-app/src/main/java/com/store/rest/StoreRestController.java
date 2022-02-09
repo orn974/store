@@ -56,7 +56,6 @@ public class StoreRestController {
     public void post(@RequestBody Product product) {
         System.out.println("Put Product =" + product);
         storeRepository.save(product);
-
     }
 
     @PutMapping("/put")
@@ -66,8 +65,6 @@ public class StoreRestController {
             return new ResponseEntity<>(HttpStatus.CREATED);}
     else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
-
 
 }
 @DeleteMapping("/delete/{storeId}")

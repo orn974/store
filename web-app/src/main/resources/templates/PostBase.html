@@ -10,15 +10,14 @@
           th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-<div class="container mt-5 mb-5">
-
-    <form th:object="${newProduct}" action="/postProduct" method="post">
-<!--    <input type="number" th:field="*{storeId}" value="" class="from-control"><br>-->
+<body style="background-color: #A2CD5A">
+<form th:object="${newProduct}" action="/postProduct" method="post">
+    <!--    <input type="number" th:field="*{storeId}" value="" class="from-control"><br>-->
     <input type="text" th:field="*{productName}" placeholder="Input product name" class="from-control"><br>
     <input type="number" th:field="*{cost}" placeholder="Input cost produkt" class="from-control"><br>
     <input type="date" th:field="*{productDate}" placeholder="Input date create" class="from-control"><br>
     <button type="submit" class="btn btn-success">Add </button>
 </form>
-</div>
+<p> </p>Press Button <a th:href="@{/getController}">"press</a>  go to back  </p>
 </body>
 </html>

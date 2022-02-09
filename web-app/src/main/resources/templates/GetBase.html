@@ -1,27 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:width="http://java.sun.com/xml/ns/persistence/orm">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Prodact base to store</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet"
           href="../static/css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}">
 </head>
-<body>
-<div th:each="el : ${storesListWeb}">
 
-    <td style="width: 40%; height: 15px;"; th:text="${el.storeId}">storerId</td>
-    <td style="width: 40%; height: 15px;"; th:text="${el.productName}">productName</td>
-    <td style="width: 40%; height: 15px;"; th:text="${el.cost}">cost</td>
-    <td style="width: 40%; height: 15px;"; th:text="${el.productDate}">productDate</td>
-    <td style="width: 20%; height: 15px;"><a th:href="@{'/putProduct/' + ${el.storeId}}">Edit</a></td>
-    <td style="width: 20%; height: 15px;"><a th:href="@{'/delProduct/' + ${el.storeId}}">Delete</a></td>
+<body style="background-color: #FFA500">
+<div style="color:#00FF00" size="2" ></div>
+<table class="storeTable" border="1px solid black">
+    <thead>
+    <tr>
+        <th>storeId</th>
+        <th>productName</th>
+        <th>cost</th>
+        <th>productDate</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a>
+                <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
+        </td>
+    </tr>
+    </tfoot>
 
-</div>
-<div>
-    <p> </p>Press Button <a th:href="@{/postProduct}">"press</a>  to add product </p>
+    <div  th:each="element : ${storesListWeb}" class="format">
+    <tr>
+    <td th:text="${element.storeId}">storerId</td>
+    <td th:text="${element.productName}">productName</td>
+    <td th:text="${element.cost}">cost</td>
+    <td th:text="${element.productDate}">productDate</td>
+    <td><a th:href="@{'/putProduct/' + ${element.storeId}}">Edit</a></td>
+    <td><a th:href="@{'/delProduct/' + ${element.storeId}}">Delete</a></td>
+    </tr>
+    </div>
 
-</div>
+
+</table>
+<p> </p>Press Button <a th:href="@{/postProduct}">"press</a>  to add product </p>
 </body>
 </html>
+
