@@ -19,6 +19,11 @@ public class StoreController {
     {restTemplate = new RestTemplate();}
     final String ROOT_URL = "http://localhost:8081/";
 
+    @GetMapping("/")
+    public String start(){
+        return "Start";
+    }
+
     @GetMapping ("/getController")
     public String getContollerMethod (Model model){
     ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
