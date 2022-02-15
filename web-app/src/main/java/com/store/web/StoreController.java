@@ -1,13 +1,22 @@
 package com.store.web;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.store.model.Product;
 import org.springframework.boot.env.ConfigTreePropertySource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -62,5 +71,21 @@ public class StoreController {
     public String delProduct (@PathVariable Long storeId){
         restTemplate.delete(ROOT_URL+"delete/" + storeId);
         return "redirect:/getController";
+    }
+    @GetMapping ("/save")
+    public ResponseEntity<InputStreamResource> saveFile (Model model) throws ParseException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
+        objectMapper.setDateFormat(df);
+        ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
+        List<Product> storesList = objectMapper.convertValue(stores.getBody(), new TypeReference<List<Product>>() { });
+        ByteArrayInputStream in = SaveFileExcel.tutorialsToExcel(storesList);
+        InputStreamResource file = new InputStreamResource(in);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=test.xls")
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
+
     }
 }

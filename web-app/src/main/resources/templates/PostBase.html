@@ -16,10 +16,10 @@
     <!--    <input type="number" th:field="*{storeId}" value="" class="from-control"><br>-->
     <input type="text" th:field="*{productName}" placeholder="Input product name" class="from-control"><br>
     <input type="number" step="0.01" th:field="*{cost}" placeholder="Input cost produkt" class="from-control"><br>
-    <input type="date" th:field="*{productDate}" placeholder="Input date create" class="from-control"><br>
+    <input type="date" min="2000-01-01" max="2200-12-31" th:field="*{productDate}" placeholder="Input date create" class="from-control"><br>
     <button type="submit" class="btn btn-success">Add </button>
 </form>
-<p> Press Button <a th:href="@{/getController}">"press</a>  go to back  </p>
+<p> Press Button <a th:href="@{/getController}">press</a>  go to back  </p>
 </div>
 </body>
 </html>
