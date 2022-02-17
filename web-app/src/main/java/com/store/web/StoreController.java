@@ -2,8 +2,8 @@ package com.store.web;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.store.model.Product;
-import org.springframework.boot.env.ConfigTreePropertySource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,8 +18,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Controller
 public class StoreController {
@@ -76,9 +74,10 @@ public class StoreController {
     public ResponseEntity<InputStreamResource> saveFile (Model model) throws ParseException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-        objectMapper.setDateFormat(df);
+        //SimpleDateFormat df = new SimpleDateFormat("'date':yyyy-MM-dd");
+        //df.applyPattern("'date':yyyy-MM-dd");
+        //objectMapper.setDateFormat(df);
+        objectMapper.registerModule(new JavaTimeModule());
         ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
         List<Product> storesList = objectMapper.convertValue(stores.getBody(), new TypeReference<List<Product>>() { });
         ByteArrayInputStream in = SaveFileExcel.tutorialsToExcel(storesList);
@@ -88,4 +87,6 @@ public class StoreController {
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
 
     }
+
+
 }
