@@ -38,9 +38,12 @@
             </tr>
         </div>
     </table>
-    <p> Press Button <a th:href="@{/postProduct}">"press</a> to add product </p>
+    <p> Press Button <a th:href="@{/postProduct}">press</a> to add product </p>
+    <form action="/save" method="post">
+    <p> File name <input type="text"  name = "filename" value="1232" th:value = "777" class="from-control">
+        Press Button  <button type="submit" class="btn btn-success">Add </button> to save in file </p>
+    </form>
 
-    <p> Press Button <a th:href="@{/save}">"press</a> to save in file </p>
 
  </div>
 </body>

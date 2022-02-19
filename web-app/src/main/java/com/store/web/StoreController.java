@@ -36,6 +36,9 @@ public class StoreController {
     ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
         List storeList = stores.getBody();
         model.addAttribute("storesListWeb", storeList);
+        String abc = "Save";
+        model.addAttribute("test1", abc);
+        //model.addAttribute("filename", new String("ProductFile"));
         return "GetBase";
     }
 
@@ -70,9 +73,8 @@ public class StoreController {
         restTemplate.delete(ROOT_URL+"delete/" + storeId);
         return "redirect:/getController";
     }
-    @GetMapping ("/save")
-    public ResponseEntity<InputStreamResource> saveFile (Model model) throws ParseException {
-
+    @PostMapping ("/save")
+    public ResponseEntity<InputStreamResource> saveFile (String filename, Model model) throws ParseException {
         ObjectMapper objectMapper = new ObjectMapper();
         //SimpleDateFormat df = new SimpleDateFormat("'date':yyyy-MM-dd");
         //df.applyPattern("'date':yyyy-MM-dd");
@@ -83,7 +85,7 @@ public class StoreController {
         ByteArrayInputStream in = SaveFileExcel.tutorialsToExcel(storesList);
         InputStreamResource file = new InputStreamResource(in);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=test.xls")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+ filename+".xls")
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
 
     }
