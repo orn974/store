@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.store.model.Product;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.ByteArrayInputStream;
-import java.text.DateFormat;
+import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,9 +37,7 @@ public class StoreController {
     ResponseEntity<List> stores = restTemplate.getForEntity(ROOT_URL+"products", List.class);
         List storeList = stores.getBody();
         model.addAttribute("storesListWeb", storeList);
-        String abc = "Save";
-        model.addAttribute("test1", abc);
-        //model.addAttribute("filename", new String("ProductFile"));
+        model.addAttribute("filename", new String("ProductFile"));
         return "GetBase";
     }
 
@@ -89,6 +88,10 @@ public class StoreController {
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
 
     }
-
+    @GetMapping ("/load")
+    public String loadFile (String loadFileName, Model model) throws IOException {
+        restTemplate.postForEntity(ROOT_URL + "post",LoadFileExcel.readFile(loadFileName), ArrayList.class);
+       return "redirect:/getController";
+    }
 
 }
