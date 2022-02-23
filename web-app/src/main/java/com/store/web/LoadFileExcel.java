@@ -1,6 +1,7 @@
 package com.store.web;
 
 
+import com.store.model.Product;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.NumberToTextConverter;
@@ -15,15 +16,15 @@ import java.util.*;
 @Service
 public class LoadFileExcel {
 
-    public static ArrayList readFile (String filename) throws IOException {
+    public static ArrayList<Product> readFile (String filename) throws IOException {
         Workbook workbook = loadWorkbook(filename);
-        ArrayList allSheets =new ArrayList();
+        ArrayList<Product> allSheets =new ArrayList();
 
         var sheetIterator = workbook.sheetIterator();
         while (sheetIterator.hasNext()) {
             Sheet sheet = sheetIterator.next();
             processSheet(sheet);
-            allSheets.add(processSheet(sheet));
+            allSheets.add((Product) sheet);
             System.out.println();
         }
         return allSheets;
@@ -42,19 +43,17 @@ public class LoadFileExcel {
                 throw new RuntimeException("Unknown Excel file extension: " + extension);
         }
     }
-    private static ArrayList processSheet(Sheet sheet) {
-        ArrayList<HashMap<Integer, List<Object>>> products = new ArrayList<>();
+    private static void processSheet(Sheet sheet) {
         System.out.println("Sheet: " + sheet.getSheetName());
         var data = new HashMap<Integer, List<Object>>();
         var iterator = sheet.rowIterator();
         for (var rowIndex = 0; iterator.hasNext(); rowIndex++) {
             var row = iterator.next();
             processRow(data, rowIndex, row);
-            products.add(data);
         }
         System.out.println("Sheet data:");
         System.out.println(data);
-        return products;
+
     }
     private static void processRow(HashMap<Integer, List<Object>> data, int rowIndex, Row row) {
         data.put(rowIndex, new ArrayList<>());

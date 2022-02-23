@@ -89,9 +89,13 @@ public class StoreController {
 
     }
     @GetMapping ("/load")
-    public String loadFile (String loadFileName, Model model) throws IOException {
-        restTemplate.postForEntity(ROOT_URL + "post",LoadFileExcel.readFile(loadFileName), ArrayList.class);
-       return "redirect:/getController";
+    public String loadFile () {
+
+        return "redirect:/getController";
+    }
+    @PostMapping ("/load")
+    public void loadFile (String LoadFileName, Model model) throws IOException {
+        restTemplate.postForEntity(ROOT_URL + "postall",LoadFileExcel.readFile(LoadFileName), ArrayList.class);
     }
 
 }

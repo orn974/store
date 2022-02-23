@@ -57,7 +57,12 @@ public class StoreRestController {
         System.out.println("Put Product =" + product);
         storeRepository.save(product);
     }
-
+    @PostMapping(value = "/postall")
+    public void postAll(@RequestBody ArrayList product) {
+        System.out.println("Put Product =" + product);
+        //storeRepository.save(product);
+        storeRepository.saveAllAndFlush(product);
+    }
     @PutMapping("/put")
     public ResponseEntity<?> put(@RequestBody Product product) {
         if (storeRepository.findById(product.getStoreId()).isPresent()) {
