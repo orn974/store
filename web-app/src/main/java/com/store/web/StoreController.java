@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -94,8 +95,9 @@ public class StoreController {
         return "redirect:/getController";
     }
     @PostMapping ("/load")
-    public void loadFile (String LoadFileName, Model model) throws IOException {
-        restTemplate.postForEntity(ROOT_URL + "postall",LoadFileExcel.readFile(LoadFileName), ArrayList.class);
+    public void loadFile (@RequestParam("LoadFileName") MultipartFile LoadFileName) throws IOException {
+        System.out.println(LoadFileName);
+       // restTemplate.postForEntity(ROOT_URL + "postall",LoadFileExcel.readFile(LoadFileName), ArrayList.class);
     }
 
 }

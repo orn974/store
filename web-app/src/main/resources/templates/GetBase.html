@@ -44,8 +44,8 @@
         Press Button  <button type="submit" class="btn btn-success">Add </button> to save in file </p>
     </form>
 
-    <form action="/load" method="post">
-        <p> File name <input type="file"  name = "LoadFileName" value="Filename" th:value = "${filename}" class="from-control">
+    <form action="/load" enctype="multipart/form-data" method="post">
+        <p> File name <input type="file" name = "LoadFileName" value="Filename" th:value = "${filename}" class="from-control">
             Press Button  <button type="submit" class="btn btn-success">Load </button> this file </p>
     </form>
  </div>
