@@ -58,7 +58,7 @@ public class StoreRestController {
         storeRepository.save(product);
     }
     @PostMapping(value = "/postall")
-    public void postAll(@RequestBody ArrayList product) {
+    public void postAll(@RequestBody ArrayList<Product> product) {
         System.out.println("Put Product =" + product);
         //storeRepository.save(product);
         storeRepository.saveAllAndFlush(product);
