@@ -109,9 +109,6 @@ public class StoreController {
     public String loadFile (@RequestParam("LoadFileName") MultipartFile LoadFileName) throws IOException {
         Workbook workbook = new XSSFWorkbook(LoadFileName.getInputStream());
 
-        //ArrayList<Product> allSheets = new ArrayList();
-
-
             Sheet sheet = workbook.sheetIterator().next();
             processSheet(sheet);
             return "redirect:/getController";
