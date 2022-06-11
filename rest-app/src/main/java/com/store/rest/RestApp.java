@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @SpringBootApplication
 @EnableJpaRepositories("com.store.dao")
 @EntityScan("com.store.model")
-public class RestApp {
+public class RestApp extends SpringBootServletInitializer {
 
         public static void main( String[] args )
         {
