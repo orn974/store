@@ -33,6 +33,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -41,7 +42,7 @@
                     <server>TomcatServer</server>
                     <path>/restapp</path>
                 </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 
