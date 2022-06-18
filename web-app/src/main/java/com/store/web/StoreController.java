@@ -37,7 +37,7 @@ public class StoreController {
 
     RestTemplate restTemplate;
     {restTemplate = new RestTemplate();}
-    final String ROOT_URL = "http://localhost:8081/";
+    final String ROOT_URL = "http://localhost:8020/rest-app-0.0.1-SNAPSHOT/";
 
     @GetMapping("/")
     public String start(){
