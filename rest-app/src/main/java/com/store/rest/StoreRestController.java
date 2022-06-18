@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/")
+//@RequestMapping("/")
 public class StoreRestController {
 
     @Autowired
