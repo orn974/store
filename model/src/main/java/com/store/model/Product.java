@@ -21,11 +21,17 @@ public class Product {
     private LocalDate productDate;
 
     public Long getStoreId() {
-        return storeId;
+           return storeId;
     }
 
     public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+        if (storeId < 0L) {
+            this.storeId = 0L;
+        } else if (storeId>100L) {
+            this.storeId = 100L;
+        } else {
+            this.storeId = storeId;
+        }
     }
 
     public String getProductName() {
